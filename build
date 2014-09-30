@@ -1,0 +1,13 @@
+#!/bin/sh
+
+DOCKERFILE_DIR=`dirname $0`
+
+ANDROID_SDK_TAR=android-sdk_r23.0.2-linux.tgz
+
+if ! sha1sum --check $DOCKERFILE_DIR/CHECKSUM; then
+  mkdir $DOCKERFILE_DIR/tmp
+  wget -O $DOCKERFILE_DIR/tmp/android-sdk_r23.0.2-linux.tgz https://dl.google.com/android/android-sdk_r23.0.2-linux.tgz
+fi
+
+docker build -t graybullet/jenkins-slave-grunt-androidsdk $DOCKERFILE_DIR
+

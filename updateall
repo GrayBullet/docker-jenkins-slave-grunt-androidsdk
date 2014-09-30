@@ -1,0 +1,14 @@
+#!/bin/sh
+
+CMD=`cat <<EOF
+spawn android update sdk --no-ui --no-https --proxy-host 192.168.0.9 --proxy-port 3129
+set timeout 1000000
+expect {
+  "Do you accept the license" { send "y\r"; exp_continue }
+  "Done\." { send "Finish!"; exit }
+}
+EOF
+`
+
+expect -c "$CMD"
+
